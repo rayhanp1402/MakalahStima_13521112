@@ -48,7 +48,7 @@ def constructCounterpoint(note):
 
 
 def printResult():
-    file_path = 'result.txt'
+    file_path = "output/result.txt"
     file = open(file_path, 'w')
 
     file.write("There are/is " + str(len(result)) + " voice leading(s) possible\n")
