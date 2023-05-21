@@ -1,0 +1,22 @@
+notes = {   # Modify this as you like (make sure to follow the rules in the paper)
+    -2 : "A3",
+    -1 : "A#3",
+    0 : "B3",
+    1 : "C4",
+    2 : "C#4",
+    3 : "D4",
+    4 : "D#4",
+    5 : "E4",
+    6 : "F4",
+    7 : "F#4",
+    8 : "G4",
+    9 : "G#4",
+    10 : "A4",
+    11 : "A#4",
+    12 : "B4",
+    13 : "C5",
+    14 : "C#5",
+    15 : "D5",
+    16 : "D#5",
+    17 : "E5"
+}
