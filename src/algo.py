@@ -9,18 +9,20 @@ cantusFirmus = [1, 6, 5, 10] # This can be modified as you like
 result = [[]]
 resultCounter = 0
 
-def backtrack(cantusFirmus, parentNote, childNote, level):
+
+def dfs(cantusFirmus, parentNote, childNote, level):
+    # parentNote is an instance of Note, childNote is an integer
 
     currentNote = Note(childNote)
     currentNote.setParent(parentNote)
-    # parentNote is an instance of Note, childNote is an integer
-    interval = abs(currentNote.noteType - cantusFirmus[level]) % 12
-    if(interval == 2 or interval == 5 or interval == 11): # No Dissonant Harmonic Intervals
+    
+    interval = abs(currentNote.noteType - cantusFirmus[level]) % 12 # This calculates the half-steps of the current harmonic interval
+    if(interval == 1 or interval == 2 or interval == 5 or interval == 6 or interval == 10 or interval == 11): # No Dissonant Harmonic Intervals
         return  # Cutoff
     
-    steps = currentNote.noteType - parentNote.noteType
+    steps = currentNote.noteType - parentNote.noteType  # This calculates the half-steps of the melodic interval between current and previous note
     if(steps == 0 and level > 0):
-        if(interval == 0 or interval == 7): # No Direct Motion to a Perfect Consonance
+        if(interval == 0 or interval == 6 or interval == 7): # No Direct Motion to a Perfect Consonance
             return  # Cutoff
 
     if(level == len(cantusFirmus) - 1):
@@ -29,7 +31,7 @@ def backtrack(cantusFirmus, parentNote, childNote, level):
         level += 1
 
         for i in range(lowerNoteNumber, upperNoteNumber + 1):   # Iteration of neighbors
-            backtrack(cantusFirmus, currentNote, i, level)
+            dfs(cantusFirmus, currentNote, i, level)
 
 
 def constructCounterpoint(note):
@@ -44,6 +46,7 @@ def constructCounterpoint(note):
     result.append([])
     resultCounter += 1
 
+
 def printResult():
     file_path = 'result.txt'
     file = open(file_path, 'w')
@@ -55,11 +58,13 @@ def printResult():
 
     file.close()
 
+
 def main():
     rootNote = Note(1)
     for i in range(lowerNoteNumber, upperNoteNumber + 1):
-        backtrack(cantusFirmus, rootNote, i, 0)
+        dfs(cantusFirmus, rootNote, i, 0)
     result.pop()
     printResult()
+
 
 main()
